@@ -1,0 +1,9 @@
+$kind: collection
+name: Wishlist API
+variables:
+  base_url: ""
+  user_token: ""
+  test_wishlist_id: ""
+  test_wish_id: ""
+  second_token: ""
+  admin_token: ""

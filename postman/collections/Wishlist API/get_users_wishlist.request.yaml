@@ -1,0 +1,7 @@
+$kind: http-request
+name: get_users_wishlist
+url: "{{base_url}}/api/wishlists/user/8"
+method: GET
+auth:
+  type: noauth
+order: 4503390132003541

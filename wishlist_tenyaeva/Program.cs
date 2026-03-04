@@ -52,6 +52,21 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.Use(async (context, next) =>
+{
+    await next();
+    if (context.Response.StatusCode == 403 && !context.Response.HasStarted)
+    {
+        context.Response.ContentType = "application/json";
+        await context.Response.WriteAsync("{\"message\":\"Доступ запрещен\"}");
+    }
+    else if (context.Response.StatusCode == 401 && !context.Response.HasStarted)
+    {
+        context.Response.ContentType = "application/json";
+        await context.Response.WriteAsync("{\"message\":\"Требуется авторизация\"}");
+    }
+});
+
 // Важно: сначала Authentication, потом Authorization!
 app.UseAuthentication();
 app.UseAuthorization();

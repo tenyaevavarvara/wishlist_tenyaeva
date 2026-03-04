@@ -1,0 +1,7 @@
+$kind: http-request
+name: delete_wishlist
+url: "{{base_url}}/api/wishlists/{{test_wishlist_id}}"
+method: DELETE
+headers:
+  Authorization: Bearer {{user_token}}
+order: 4503599627269626

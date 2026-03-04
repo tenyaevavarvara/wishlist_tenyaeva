@@ -1,0 +1,23 @@
+$kind: http-request
+name: creat_first_user
+url: "{{base_url}}/api/wishlists"
+method: POST
+headers:
+  Content-Type: application/json
+  Authorization: Bearer {{user_token}}
+body:
+  type: json
+  content: "{\r
+
+    \    \"name\": \"День рождения 2026\",\r
+
+    \    \"description\": \"Мои пожелания на день рождения\"\r
+
+    }"
+scripts:
+  - type: afterResponse
+    code: "var jsonData = pm.response.json();\r
+
+      pm.collectionVariables.set(\"test_wishlist_id\", jsonData.id);"
+    language: text/javascript
+order: 4498982927887737

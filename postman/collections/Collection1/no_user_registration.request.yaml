@@ -1,0 +1,20 @@
+$kind: http-request
+name: no_user_registration
+url: https://localhost:7178/api/auth/register
+method: POST
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: "{\r
+
+    \    \"username\": \"user001\",\r
+
+    \    \"email\": \"useroo1@example.com\",\r
+
+    \    \"password\": \"password123\"\r
+
+    }"
+order: 1550345043799900
+examples: ./.resources\no_user_registration.resources\examples

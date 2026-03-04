@@ -1,0 +1,16 @@
+$kind: http-request
+name: second_user_registration
+url: "{{base_url}}/api/auth/register"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"username\": \"seconduser\",\r
+
+    \    \"email\": \"second@example.com\",\r
+
+    \    \"password\": \"password123\"\r
+
+    }"
+order: 4472072660340946

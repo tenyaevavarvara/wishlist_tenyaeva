@@ -1,0 +1,7 @@
+$kind: http-request
+name: book_wish_second
+url: "{{base_url}}/api/wishes/{{test_wish_id}}/book"
+method: PATCH
+headers:
+  Authorization: Bearer {{second_token}}
+order: 4503599060736031

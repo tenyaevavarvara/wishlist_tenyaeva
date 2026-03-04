@@ -1,0 +1,7 @@
+$kind: http-request
+name: current_user
+url: "{{base_url}}/api/auth/me"
+method: GET
+headers:
+  Authorization: Bearer {{user_token}}
+order: 4496479611607583

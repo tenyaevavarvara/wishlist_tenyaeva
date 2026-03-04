@@ -112,7 +112,8 @@ namespace wishlist_tenyaeva.Controllers
             }
             catch (UnauthorizedAccessException ex)
             {
-                return Forbid(ex.Message);
+                //return Forbid(ex.Message);
+                return StatusCode(403, new { message = ex.Message });
             }
             catch (Exception ex)
             {

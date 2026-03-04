@@ -1,0 +1,5 @@
+$kind: http-request
+name: get_all_wishlists
+url: "{{base_url}}/api/wishlists"
+method: GET
+order: 4503266290108953

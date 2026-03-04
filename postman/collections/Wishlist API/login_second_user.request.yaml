@@ -1,0 +1,14 @@
+$kind: http-request
+name: login_second_user
+url: "{{base_url}}/api/auth/login"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"email\": \"second@example.com\",\r
+
+    \    \"password\": \"password123\"\r
+
+    }"
+order: 4503598163760404

@@ -45,6 +45,7 @@ namespace wishlist_tenyaeva.Services
         {
             var wish = await _context.Wishes
                 .Include(w => w.Wishlist)
+                    .ThenInclude(wl => wl.User)
                 .Include(w => w.BookedByUser)
                 .FirstOrDefaultAsync(w => w.Id == id);
 
@@ -62,6 +63,7 @@ namespace wishlist_tenyaeva.Services
                 CreatedAt = wish.CreatedAt,
                 WishlistId = wish.WishlistId,
                 WishlistName = wish.Wishlist.Name,
+                OwnerName = wish.Wishlist.User?.Username,
                 BookedByUserId = wish.BookedByUserId,
                 BookedByUserName = wish.BookedByUser?.Username
             };

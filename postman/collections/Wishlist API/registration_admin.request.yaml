@@ -1,0 +1,16 @@
+$kind: http-request
+name: registration_admin
+url: "{{base_url}}/api/auth/register"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"username\": \"admin01\",\r
+
+    \    \"email\": \"admin01@example.com\",\r
+
+    \    \"password\": \"admin123\"\r
+
+    }\r\n"
+order: 4478011208001024

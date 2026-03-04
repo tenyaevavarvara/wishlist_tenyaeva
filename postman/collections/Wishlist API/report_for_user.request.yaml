@@ -1,0 +1,7 @@
+$kind: http-request
+name: report_for_user
+url: "{{base_url}}/api/reports/wishlist-stats"
+method: GET
+headers:
+  Authorization: Bearer {{user_token}}
+order: 4503599627096600

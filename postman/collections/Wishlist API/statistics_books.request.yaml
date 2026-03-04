@@ -1,0 +1,7 @@
+$kind: http-request
+name: statistics_books
+url: "{{base_url}}/api/reports/booking-statistics"
+method: GET
+headers:
+  Authorization: Bearer {{admin_token}}
+order: 4503599623376163

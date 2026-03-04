@@ -1,0 +1,19 @@
+$kind: http-request
+name: update_alien_wishlist
+url: "{{base_url}}/api/wishlists/4"
+method: PUT
+headers:
+  Authorization: Bearer {{user_token}}
+  Content-Type: application/json
+body:
+  type: json
+  content: "{\r
+
+    \    \"id\": 4,\r
+
+    \    \"name\": \"Попытка взлома\",\r
+
+    \    \"description\": \"Пытаюсь изменить чужой список\"\r
+
+    }"
+order: 4503527103074349

@@ -1,0 +1,7 @@
+$kind: http-request
+name: chek_wish_booking_mine
+url: "{{base_url}}/api/bookings/check/{{test_wish_id}}"
+method: GET
+headers:
+  Authorization: Bearer {{second_token}}
+order: 4503599605330115

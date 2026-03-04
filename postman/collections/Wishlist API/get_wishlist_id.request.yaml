@@ -1,0 +1,5 @@
+$kind: http-request
+name: get_wishlist_id
+url: "{{base_url}}/api/wishlists/{{test_wishlist_id}}"
+method: GET
+order: 4503498142657199

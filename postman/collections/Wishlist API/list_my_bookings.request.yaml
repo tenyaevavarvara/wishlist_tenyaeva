@@ -1,0 +1,7 @@
+$kind: http-request
+name: list_my_bookings
+url: "{{base_url}}/api/bookings/my"
+method: GET
+headers:
+  Authorization: Bearer {{second_token}}
+order: 4503599578043076

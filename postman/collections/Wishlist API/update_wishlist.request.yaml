@@ -1,0 +1,18 @@
+$kind: http-request
+name: update_wishlist
+url: "{{base_url}}/api/wishlists/{{test_wishlist_id}}"
+method: PUT
+headers:
+  Authorization: Bearer {{user_token}}
+body:
+  type: json
+  content: "{\r
+
+    \    \"id\": {{test_wishlist_id}},\r
+
+    \    \"name\": \"Обновленный день рождения 2026\",\r
+
+    \    \"description\": \"Новые пожелания\"\r
+
+    }"
+order: 4503514642084135

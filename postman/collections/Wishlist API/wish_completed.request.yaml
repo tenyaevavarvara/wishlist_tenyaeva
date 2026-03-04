@@ -1,0 +1,10 @@
+$kind: http-request
+name: wish_completed
+url: "{{base_url}}/api/wishes/{{test_wish_id}}/status"
+method: PATCH
+headers:
+  Authorization: Bearer {{user_token}}
+body:
+  type: json
+  content: "2\r\n"
+order: 4503599622182930

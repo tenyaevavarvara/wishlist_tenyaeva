@@ -1,0 +1,26 @@
+$kind: http-example
+name: login_user
+request:
+  url: "{{base_url}}/api/auth/login"
+  method: POST
+  body:
+    type: json
+    content: "{\r
+
+      \    \"email\": \"test@example.com\",\r
+
+      \    \"password\": \"password123\"\r
+
+      }"
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    content-type: application/json; charset=utf-8
+    date: Wed, 04 Mar 2026 02:19:31 GMT
+    server: Kestrel
+    transfer-encoding: chunked
+  body:
+    type: json
+    content: '{"id":2,"username":"testuser","email":"test@example.com","role":"User","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjIiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidGVzdHVzZXIiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJ0ZXN0QGV4YW1wbGUuY29tIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiVXNlciIsImV4cCI6MTc3MzE5NTU3MSwiaXNzIjoiV2lzaGxpc3RBcHAiLCJhdWQiOiJXaXNobGlzdEFwcENsaWVudCJ9.LfwxnjNR3KYdiv-UFs9mbu84Sk6YMAv2HVXE1hc3JOE"}'
+order: 1772590791485

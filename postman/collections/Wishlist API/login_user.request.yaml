@@ -1,0 +1,22 @@
+$kind: http-request
+name: login_user
+url: "{{base_url}}/api/auth/login"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"email\": \"test@example.com\",\r
+
+    \    \"password\": \"password123\"\r
+
+    }"
+scripts:
+  - type: afterResponse
+    code: "var jsonData = pm.response.json();\r
+
+      pm.collectionVariables.set(\"user_token\", jsonData.token);\r
+
+      console.log(\"Токен сохранен:\", jsonData.token);"
+    language: text/javascript
+order: 4481475780638591

@@ -1,0 +1,5 @@
+$kind: http-request
+name: get_all_wishes_LINQ
+url: "{{base_url}}/api/wishes/available"
+method: GET
+order: 4503592793266377

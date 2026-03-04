@@ -1,0 +1,28 @@
+$kind: http-request
+name: add_wish
+url: "{{base_url}}/api/wishes"
+method: POST
+headers:
+  Authorization: Bearer {{user_token}}
+body:
+  type: json
+  content: "{\r
+
+    \    \"title\": \"Книга по C#\",\r
+
+    \    \"description\": \"Изучаем программирование\",\r
+
+    \    \"link\": \"https://ozon.ru/book\",\r
+
+    \    \"price\": 1500,\r
+
+    \    \"wishlistId\": {{test_wishlist_id}}\r
+
+    }"
+scripts:
+  - type: afterResponse
+    code: "var jsonData = pm.response.json();\r
+
+      pm.collectionVariables.set(\"test_wish_id\", jsonData.id);"
+    language: text/javascript
+order: 4503538894922864

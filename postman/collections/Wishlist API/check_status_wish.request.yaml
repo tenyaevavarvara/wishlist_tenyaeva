@@ -1,0 +1,5 @@
+$kind: http-request
+name: check_status_wish
+url: "{{base_url}}/api/wishes/{{test_wish_id}}"
+method: GET
+order: 4503599041161289

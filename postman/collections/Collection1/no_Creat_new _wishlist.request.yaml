@@ -1,0 +1,20 @@
+$kind: http-request
+name: no_Creat_new _wishlist
+url: https://localhost:7178/api/wishlists
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"name\": \"Мой день рождения 2026\",\r
+
+    \    \"description\": \"Что я хочу на день рождения\"\r
+
+    }"
+auth:
+  credentials:
+    - key: token
+      value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjIiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidGVzdHVzZXIiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJ0ZXN0QGV4YW1wbGUuY29tIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiVXNlciIsImV4cCI6MTc3MzE5MzE4MCwiaXNzIjoiV2lzaGxpc3RBcHAiLCJhdWQiOiJXaXNobGlzdEFwcENsaWVudCJ9.jdf-wvgxChIZ4LDkAhuuaHWcZkXOrXcUAJ7zLhAX8T0
+  type: bearer
+order: 4096862584708215
+examples: ./.resources\no_Creat_new _wishlist.resources\examples
