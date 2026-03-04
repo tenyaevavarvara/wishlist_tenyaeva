@@ -91,7 +91,7 @@ namespace wishlist_tenyaeva.Controllers
 
         // PUT: api/wishlists/{id} - обновить список (только владелец)
         [HttpPut("{id}")]
-        [Authorize]
+        [Authorize] // только авторизованные
         public async Task<IActionResult> UpdateWishlist(int id, UpdateWishlistDto dto)
         {
             try

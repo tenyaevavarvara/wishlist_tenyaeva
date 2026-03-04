@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿// регистрация и вход
+using System.ComponentModel.DataAnnotations;
 
 namespace wishlist_tenyaeva.DTO
 {

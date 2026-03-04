@@ -67,7 +67,7 @@ app.Use(async (context, next) =>
     }
 });
 
-// Важно: сначала Authentication, потом Authorization!
+
 app.UseAuthentication();
 app.UseAuthorization();
 

@@ -62,7 +62,7 @@ namespace wishlist_tenyaeva.Controllers
 
         // GET: api/auth/me
         [HttpGet("me")]
-        [Authorize]
+        [Authorize] // проверка владельца будет в сервисе
         public async Task<IActionResult> GetMe()
         {
             var userId = int.Parse(User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier).Value);

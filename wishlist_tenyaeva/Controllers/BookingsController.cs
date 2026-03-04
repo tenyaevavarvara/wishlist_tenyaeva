@@ -7,7 +7,7 @@ namespace wishlist_tenyaeva.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize] // Все методы требуют авторизации
+    [Authorize] // только авторизованные
     public class BookingsController : ControllerBase
     {
         private readonly IBookingService _bookingService;

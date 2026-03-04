@@ -14,7 +14,7 @@ namespace wishlist_tenyaeva.Models
         // Email пользователя
         public string Email { get; set; }
 
-        // Хеш пароля (никогда не храним пароли в открытом виде!)
+        // Хеш пароля (не храним пароли в открытом видеы)
         public string PasswordHash { get; set; }
 
         // Роль пользователя (User или Admin)

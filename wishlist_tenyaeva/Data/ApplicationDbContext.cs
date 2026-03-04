@@ -11,7 +11,7 @@ namespace wishlist_tenyaeva.Data
         {
         }
 
-        // DbSet для каждой модели - это будет таблицами в базе данных
+        // DbSet для каждой модели - таблицы в базе данных
         public DbSet<User> Users { get; set; }
         public DbSet<Wishlist> Wishlists { get; set; }
         public DbSet<Wish> Wishes { get; set; }
@@ -22,7 +22,7 @@ namespace wishlist_tenyaeva.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            // НАСТРОЙКА СВЯЗЕЙ И ОГРАНИЧЕНИЙ
+            // настройка связей и ограничений
 
             // 1. Связь User -> Wishlist (один ко многим)
             modelBuilder.Entity<Wishlist>()
@@ -40,20 +40,19 @@ namespace wishlist_tenyaeva.Data
 
             // 4. Связь BookedWish -> User (кто забронировал)
             modelBuilder.Entity<BookedWish>()
-                .HasOne(b => b.User)
-                .WithMany(u => u.BookedWishes)     // User.BookedWishes это ICollection<BookedWish>
-                .HasForeignKey(b => b.UserId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .HasOne(b => b.User)               // У записи о бронировании один пользователь
+                .WithMany(u => u.BookedWishes)     // User.BookedWishes это ICollection<BookedWish>  // У пользователя много записей о бронированиях
+                .HasForeignKey(b => b.UserId)      // Внешний ключ - UserId в таблице BookedWishes
+                .OnDelete(DeleteBehavior.Restrict);// Запрет каскадного удаления
 
             // 5. Связь BookedWish -> Wish (что забронировали)
             modelBuilder.Entity<BookedWish>()
-                .HasOne(b => b.Wish)
-                .WithMany()                          // У Wish НЕТ коллекции BookedWishes
-                .HasForeignKey(b => b.WishId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            // НАСТРОЙКА ИНДЕКСОВ (для ускорения поиска)
-
+                .HasOne(b => b.Wish)                     // У записи о бронировании одно желание
+                .WithMany()                              // У желания может быть много записей о бронировании (история)                
+                .HasForeignKey(b => b.WishId)            // Внешний ключ - WishId в таблице BookedWishes
+                .OnDelete(DeleteBehavior.Restrict);      // Запрет каскадного удаления
+            
+            // настройка индексов (для ускорения поиска)
             // Индекс для быстрого поиска пользователей по email
             modelBuilder.Entity<User>()
                 .HasIndex(u => u.Email)
@@ -76,8 +75,7 @@ namespace wishlist_tenyaeva.Data
             modelBuilder.Entity<BookedWish>()
                 .HasIndex(b => b.UserId);
 
-            // НАСТРОЙКА ОГРАНИЧЕНИЙ ДЛЯ СВОЙСТВ
-
+            // настройка ограничений для свойств
             // Настройка свойств для User
             modelBuilder.Entity<User>(entity =>
             {
@@ -118,18 +116,17 @@ namespace wishlist_tenyaeva.Data
                     .HasMaxLength(500);
 
                 entity.Property(w => w.Price)
-                    .HasPrecision(18, 2);             // 18 знаков всего, 2 после запятой (для денег)
+                    .HasPrecision(18, 2);             // 18 знаков всего, 2 после запятой (для цены)
             });
 
-            // НАЧАЛЬНЫЕ ДАННЫЕ (опционально - для тестирования)
-            // Можно добавить тестового администратора
+            // начальные данные
             modelBuilder.Entity<User>().HasData(
                 new User
                 {
                     Id = 1,
                     Username = "admin",
                     Email = "admin@example.com",
-                    PasswordHash = "AQAAAAIAAYagAAAAEJ0...", // Здесь будет реальный хеш пароля
+                    PasswordHash = "AQAAAAIAAYagAAAAEJ0...", 
                     Role = "Admin",
                     CreatedAt = new DateTime(2024, 1, 1)
                 }

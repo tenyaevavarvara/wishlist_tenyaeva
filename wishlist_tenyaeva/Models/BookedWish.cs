@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;  // Для ICollection
+using System.Collections.Generic;
 
 namespace wishlist_tenyaeva.Models
 {
@@ -13,16 +13,14 @@ namespace wishlist_tenyaeva.Models
         // ID пользователя, который забронировал
         public int UserId { get; set; }
 
-        // Навигационное свойство - пользователь
         public User User { get; set; }
 
         // ID желания, которое забронировали
         public int WishId { get; set; }
 
-        // Навигационное свойство - желание
         public Wish Wish { get; set; }
 
-        // МЕТОД БИЗНЕС-ЛОГИКИ
+        // метод бизнес логики
         public string GetBookingInfo()
         {
             return $"Пользователь {User?.Username} забронировал {Wish?.Title} {BookedAt:dd.MM.yyyy}";
