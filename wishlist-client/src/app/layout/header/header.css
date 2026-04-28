@@ -1,0 +1,38 @@
+mat-toolbar {
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  gap: 16px;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-svg {
+  width: 32px;
+  height: 32px;
+  color: white;
+}
+
+.logo-text {
+  font-size: 20px;
+  font-weight: 500;
+  color: white;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.nav-links {
+  display: flex;
+  gap: 8px;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 8px;
+}
