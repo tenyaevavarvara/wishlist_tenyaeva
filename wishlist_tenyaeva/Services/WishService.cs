@@ -180,6 +180,14 @@ namespace wishlist_tenyaeva.Services
             wish.BookedByUserId = null;
             wish.BookedByUser = null;
 
+            var bookedWish = await _context.BookedWishes
+                .FirstOrDefaultAsync(b => b.WishId == wishId && b.UserId == userId);
+
+            if (bookedWish != null)
+            {
+                _context.BookedWishes.Remove(bookedWish);
+            }
+
             await _context.SaveChangesAsync();
             return true;
         }

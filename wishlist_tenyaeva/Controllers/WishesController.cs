@@ -79,7 +79,10 @@ namespace wishlist_tenyaeva.Controllers
         {
             try
             {
-                var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+                var userId = int.Parse
+                    (User
+                    .FindFirst(ClaimTypes.NameIdentifier)
+                    .Value);
 
                 // Проверяем, что список существует
                 var wishlist = await _wishlistService.GetWishlistByIdAsync(dto.WishlistId);

@@ -12,6 +12,18 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAngularApp",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:4200")  // Адрес Angular приложения
+                  .AllowAnyHeader()                      // Разрешить любые заголовки
+                  .AllowAnyMethod()                      // Разрешить любые HTTP методы (GET, POST, PUT, DELETE, PATCH)
+                  .AllowCredentials();                   // Разрешить передачу куки/токенов
+        });
+});
+
 // Настройка JWT аутентификации
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -51,6 +63,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseCors("AllowAngularApp");
 
 app.Use(async (context, next) =>
 {
