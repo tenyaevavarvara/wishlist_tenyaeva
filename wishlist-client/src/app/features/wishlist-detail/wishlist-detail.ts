@@ -180,7 +180,7 @@ export class WishlistDetailComponent implements OnInit {
     });
   }
 
-  // Методы для проверки прав (без изменений)
+  // Методы для проверки прав
   canBook(wish: Wish): boolean {
     return !this.isOwner &&                           // не владелец
            this.authService.isAuthenticated() && 

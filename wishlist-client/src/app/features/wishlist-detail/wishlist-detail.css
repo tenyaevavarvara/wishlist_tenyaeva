@@ -128,7 +128,6 @@ mat-divider {
   margin: 16px 0;
 }
 
-/* Добавьте стиль для метки владельца */
 .owner-label {
   display: inline-flex;
   align-items: center;

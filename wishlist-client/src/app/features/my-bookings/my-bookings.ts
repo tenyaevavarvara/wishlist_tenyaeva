@@ -100,7 +100,6 @@ export class MyBookingsComponent implements OnInit {
           
           // Если список стал пустым, показываем сообщение
           if (this.filteredBookings.length === 0) {
-            // Можно ничего не делать, шаблон покажет "нет бронирований"
           }
         },
         error: (err) => {

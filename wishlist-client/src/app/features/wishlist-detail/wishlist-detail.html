@@ -76,13 +76,6 @@
               Удалить
             </button>
             <!-- Для владельца показываем статус в виде кнопок действий -->
-            <!--
-            <button mat-button *ngIf="wish.status === WishStatus.Available" 
-                    (click)="updateStatus(wish, WishStatus.Fulfilled)">
-              <mat-icon>check_circle</mat-icon>
-              Отметить исполненным
-            </button>
-            -->
             <button mat-button 
                     [color]="wish.status === WishStatus.Fulfilled ? 'basic' : 'primary'"
                     [disabled]="wish.status === WishStatus.Fulfilled"

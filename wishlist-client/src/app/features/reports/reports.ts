@@ -30,7 +30,6 @@ export class ReportsComponent implements OnInit {
   wishlistStats: any = null;
   bookingStats: any[] = [];
   
-  // Изменено: убран столбец totalBookings, оставлен только uniqueWishes
   displayedColumns: string[] = ['userId', 'userName', 'uniqueWishes', 'lastBookingDate'];
 
   constructor(
