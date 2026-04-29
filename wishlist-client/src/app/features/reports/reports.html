@@ -1,0 +1,94 @@
+<div class="reports-container">
+  <div class="header">
+    <h1>Отчеты</h1>
+    <p>Статистика системы (доступно только администраторам)</p>
+  </div>
+
+  <div class="loading-spinner" *ngIf="loading">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
+
+  <div *ngIf="!loading && wishlistStats">
+    <!-- Общая статистика вишлистов -->
+    <mat-card class="stats-card">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>analytics</mat-icon>
+          Общая статистика вишлистов
+        </mat-card-title>
+      </mat-card-header>
+      
+      <mat-card-content>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-value">{{ wishlistStats.totalWishlists }}</div>
+            <div class="stat-label">Всего вишлистов</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">{{ wishlistStats.totalWishes }}</div>
+            <div class="stat-label">Всего желаний</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">{{ wishlistStats.totalAvailable }}</div>
+            <div class="stat-label">Доступно</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">{{ wishlistStats.totalBooked }}</div>
+            <div class="stat-label">Забронировано</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">{{ wishlistStats.totalFulfilled }}</div>
+            <div class="stat-label">Исполнено</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">{{ wishlistStats.averageWishesPerList | number:'1.1-1' }}</div>
+            <div class="stat-label">Среднее желаний на список</div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Статистика бронирований по пользователям -->
+    <mat-card class="stats-card">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>shopping_cart</mat-icon>
+          Статистика бронирований по пользователям
+        </mat-card-title>
+      </mat-card-header>
+      
+      <mat-card-content>
+        <div class="table-container" *ngIf="bookingStats.length > 0">
+          <table mat-table [dataSource]="bookingStats">
+            <ng-container matColumnDef="userId">
+              <th mat-header-cell *matHeaderCellDef>ID</th>
+              <td mat-cell *matCellDef="let stat">{{ stat.userId }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="userName">
+              <th mat-header-cell *matHeaderCellDef>Пользователь</th>
+              <td mat-cell *matCellDef="let stat">{{ stat.userName }}</td>
+            </ng-container>
+
+            <!-- Изменено: столбец теперь называется "Бронирований" вместо "Уникальных желаний" -->
+            <ng-container matColumnDef="uniqueWishes">
+              <th mat-header-cell *matHeaderCellDef>Бронирований</th>
+              <td mat-cell *matCellDef="let stat">{{ stat.uniqueWishes }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="lastBookingDate">
+              <th mat-header-cell *matHeaderCellDef>Последнее бронирование</th>
+              <td mat-cell *matCellDef="let stat">{{ stat.lastBookingDate | date:'dd.MM.yyyy' }}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </div>
+        <div class="no-data" *ngIf="bookingStats.length === 0">
+          <p>Нет данных о бронированиях</p>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

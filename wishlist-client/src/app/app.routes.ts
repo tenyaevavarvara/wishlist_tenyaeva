@@ -1,65 +1,22 @@
 import { Routes } from '@angular/router';
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
-// ============= ВРЕМЕННЫЕ КОМПОНЕНТЫ-ЗАГЛУШКИ (ОБЪЯВЛЯЕМ ПЕРВЫМИ) =============
-
-@Component({
-  standalone: true,
-  imports: [CommonModule],
-  template: '<div class="placeholder"><h1>Все вишлисты</h1><p>Здесь будет отображаться список всех вишлистов</p></div>',
-  styles: ['.placeholder { padding: 20px; text-align: center; }']
-})
-export class WishlistsPlaceholder {}
-
-@Component({
-  standalone: true,
-  imports: [CommonModule],
-  template: '<div class="placeholder"><h1>Вход в систему</h1><p>Здесь будет форма входа</p></div>',
-  styles: ['.placeholder { padding: 20px; text-align: center; }']
-})
-export class LoginPlaceholder {}
-
-@Component({
-  standalone: true,
-  imports: [CommonModule],
-  template: '<div class="placeholder"><h1>Регистрация</h1><p>Здесь будет форма регистрации</p></div>',
-  styles: ['.placeholder { padding: 20px; text-align: center; }']
-})
-export class RegisterPlaceholder {}
-
-@Component({
-  standalone: true,
-  imports: [CommonModule],
-  template: '<div class="placeholder"><h1>Мои вишлисты</h1><p>Здесь будут мои списки желаний</p></div>',
-  styles: ['.placeholder { padding: 20px; text-align: center; }']
-})
-export class MyWishlistsPlaceholder {}
-
-@Component({
-  standalone: true,
-  imports: [CommonModule],
-  template: '<div class="placeholder"><h1>Мои бронирования</h1><p>Здесь будут желания, которые я забронировал</p></div>',
-  styles: ['.placeholder { padding: 20px; text-align: center; }']
-})
-export class MyBookingsPlaceholder {}
-
-@Component({
-  standalone: true,
-  imports: [CommonModule],
-  template: '<div class="placeholder"><h1>Профиль пользователя</h1><p>Здесь будет информация о пользователе</p></div>',
-  styles: ['.placeholder { padding: 20px; text-align: center; }']
-})
-export class ProfilePlaceholder {}
-
-// ============= МАРШРУТЫ (ИСПОЛЬЗУЮТ КОМПОНЕНТЫ, ОБЪЯВЛЕННЫЕ ВЫШЕ) =============
+import { LoginComponent } from './features/login/login';
+import { RegisterComponent } from './features/register/register';
+import { WishlistListComponent } from './features/wishlist-list/wishlist-list';
+import { WishlistDetailComponent } from './features/wishlist-detail/wishlist-detail';
+import { MyWishlistsComponent } from './features/my-wishlists/my-wishlists';
+import { MyBookingsComponent } from './features/my-bookings/my-bookings';
+import { ProfileComponent } from './features/profile/profile';
+import { ReportsComponent } from './features/reports/reports';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/wishlists', pathMatch: 'full' },
-  { path: 'wishlists', component: WishlistsPlaceholder, title: 'Все вишлисты' },
-  { path: 'login', component: LoginPlaceholder, title: 'Вход' },
-  { path: 'register', component: RegisterPlaceholder, title: 'Регистрация' },
-  { path: 'my-wishlists', component: MyWishlistsPlaceholder, title: 'Мои списки' },
-  { path: 'my-bookings', component: MyBookingsPlaceholder, title: 'Мои бронирования' },
-  { path: 'profile', component: ProfilePlaceholder, title: 'Профиль' },
+  { path: 'wishlists', component: WishlistListComponent, title: 'Все вишлисты' },
+  { path: 'wishlists/:id', component: WishlistDetailComponent, title: 'Вишлист' },
+  { path: 'login', component: LoginComponent, title: 'Вход' },
+  { path: 'register', component: RegisterComponent, title: 'Регистрация' },
+  { path: 'my-wishlists', component: MyWishlistsComponent, title: 'Мои списки' },
+  { path: 'my-bookings', component: MyBookingsComponent, title: 'Мои бронирования' },
+  { path: 'profile', component: ProfileComponent, title: 'Профиль' },
+  { path: 'reports', component: ReportsComponent, title: 'Отчеты' },
+  { path: '**', redirectTo: '/wishlists' }
 ];

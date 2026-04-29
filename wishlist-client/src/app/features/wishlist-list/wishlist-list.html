@@ -1,0 +1,100 @@
+<div class="wishlist-container">
+  <!-- Заголовок и панель управления -->
+  <div class="header-panel">
+    <h1>Вишлисты</h1>
+    
+    <div class="controls">
+      <!-- Поиск -->
+      <mat-form-field appearance="outline" class="search-field">
+        <mat-label>Поиск</mat-label>
+        <input matInput placeholder="По названию или автору..." [(ngModel)]="searchTerm" (ngModelChange)="onSearchChange()">
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+      
+      <!-- Переключение режима отображения -->
+      <button mat-raised-button (click)="toggleViewMode()">
+        <mat-icon>{{ viewMode === 'table' ? 'grid_view' : 'table_rows' }}</mat-icon>
+        {{ viewMode === 'table' ? 'Карточки' : 'Таблица' }}
+      </button>
+      
+      <!-- Кнопка добавления (только для авторизованных) -->
+      <button mat-raised-button color="primary" routerLink="/wishlists/create" *ngIf="authService.isAuthenticated()">
+        <mat-icon>add</mat-icon>
+        Создать вишлист
+      </button>
+    </div>
+  </div>
+  
+  <!-- Индикатор загрузки -->
+  <div class="loading-spinner" *ngIf="loading">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
+  
+  <!-- Режим таблицы -->
+  <div *ngIf="!loading && viewMode === 'table'" class="table-view">
+    <table mat-table [dataSource]="filteredWishlists" matSort (matSortChange)="onSortChange($event)">
+      
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Название</th>
+        <td mat-cell *matCellDef="let wishlist">{{ wishlist.name }}</td>
+      </ng-container>
+      
+      <ng-container matColumnDef="ownerName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Владелец</th>
+        <td mat-cell *matCellDef="let wishlist">{{ wishlist.ownerName }}</td>
+      </ng-container>
+      
+      <ng-container matColumnDef="wishesCount">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Всего желаний</th>
+        <td mat-cell *matCellDef="let wishlist">{{ wishlist.wishesCount }}</td>
+      </ng-container>
+      
+      <ng-container matColumnDef="availableWishes">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Доступно</th>
+        <td mat-cell *matCellDef="let wishlist">{{ wishlist.availableWishes }}</td>
+      </ng-container>
+      
+      <ng-container matColumnDef="bookedWishes">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Забронировано</th>
+        <td mat-cell *matCellDef="let wishlist">{{ wishlist.bookedWishes }}</td>
+      </ng-container>
+      
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Действия</th>
+        <td mat-cell *matCellDef="let wishlist">
+          <button mat-icon-button color="primary" [routerLink]="['/wishlists', wishlist.id]">
+            <mat-icon>visibility</mat-icon>
+          </button>
+          <button mat-icon-button color="accent" *ngIf="authService.getUser()?.id === wishlist.userId" [routerLink]="['/wishlists', wishlist.id, 'edit']">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" *ngIf="authService.getUser()?.id === wishlist.userId" (click)="deleteWishlist(wishlist.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    
+    <div class="no-data" *ngIf="filteredWishlists.length === 0">
+      <p>Нет вишлистов, соответствующих критериям поиска</p>
+    </div>
+  </div>
+  
+  <!-- Режим карточек -->
+  <div *ngIf="!loading && viewMode === 'cards'" class="cards-view">
+    <div class="cards-grid">
+      <app-wish-card 
+        *ngFor="let wishlist of filteredWishlists" 
+        [wishlist]="wishlist"
+        (delete)="deleteWishlist($event)">
+      </app-wish-card>
+    </div>
+    
+    <div class="no-data" *ngIf="filteredWishlists.length === 0">
+      <p>Нет вишлистов, соответствующих критериям поиска</p>
+    </div>
+  </div>
+</div>

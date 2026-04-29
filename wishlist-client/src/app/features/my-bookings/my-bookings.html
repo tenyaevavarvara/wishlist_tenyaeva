@@ -1,0 +1,69 @@
+<div class="bookings-container">
+  <div class="header">
+    <h1>Мои бронирования</h1>
+    <p class="subtitle">Желания, которые вы забронировали у других пользователей</p>
+  </div>
+
+  <div class="loading-spinner" *ngIf="loading">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
+
+  <div class="no-bookings" *ngIf="!loading && filteredBookings.length === 0">
+    <mat-icon class="empty-icon">shopping_cart</mat-icon>
+    <h2>У вас пока нет бронирований</h2>
+    <p>Перейдите к вишлистам других пользователей и забронируйте желания</p>
+    <button mat-raised-button color="primary" routerLink="/wishlists">
+      <mat-icon>search</mat-icon>
+      Смотреть вишлисты
+    </button>
+  </div>
+
+  <div class="bookings-grid" *ngIf="!loading && filteredBookings.length > 0">
+    <mat-card *ngFor="let booking of filteredBookings" class="booking-card">
+      <mat-card-header>
+        <mat-card-title>{{ booking.wishTitle }}</mat-card-title>
+        <mat-card-subtitle>
+          Из вишлиста: 
+          <a [routerLink]="['/wishlists', booking.wishlistId]">{{ booking.wishlistName }}</a>
+        </mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="owner-info">
+          <mat-icon>person</mat-icon>
+          <span>Владелец: {{ booking.ownerName }}</span>
+        </div>
+        
+        <div class="price-info" *ngIf="booking.wishPrice">
+          <mat-icon>attach_money</mat-icon>
+          <span>{{ formatPrice(booking.wishPrice) }}</span>
+        </div>
+
+        <div class="description" *ngIf="booking.wishDescription">
+          <p>{{ booking.wishDescription }}</p>
+        </div>
+
+        <div class="link-info" *ngIf="booking.wishLink">
+          <mat-icon>link</mat-icon>
+          <a [href]="booking.wishLink" target="_blank">Ссылка на товар</a>
+        </div>
+
+        <div class="booked-date">
+          <mat-icon>event</mat-icon>
+          <span>Забронировано: {{ booking.bookedAt | date:'dd.MM.yyyy, HH:mm' }}</span>
+        </div>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-raised-button color="warn" (click)="cancelBooking(booking.wishId)">
+          <mat-icon>remove_shopping_cart</mat-icon>
+          Отменить бронирование
+        </button>
+        <button mat-button color="primary" [routerLink]="['/wishlists', booking.wishlistId]">
+          <mat-icon>visibility</mat-icon>
+          К вишлисту
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

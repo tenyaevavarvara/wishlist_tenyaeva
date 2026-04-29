@@ -9,15 +9,38 @@
   <div class="spacer"></div>
   
   <nav class="nav-links">
-    <a mat-button routerLink="/">Главная</a>
-    <a mat-button routerLink="/wishlists">Вишлисты</a>
-    <a mat-button routerLink="/my-wishlists">Мои списки</a>
-    <a mat-button routerLink="/my-bookings">Мои бронирования</a>
-    <a mat-button routerLink="/profile">Профиль</a>
+    <a mat-button routerLink="/wishlists">Все вишлисты</a>
   </nav>
   
-  <div class="auth-buttons">
+  <nav class="nav-links" *ngIf="authService.isAuthenticated()">
+    <a mat-button routerLink="/my-wishlists">Мои списки</a>
+    <a mat-button routerLink="/my-bookings">Мои бронирования</a>
+  </nav>
+  
+  <div class="auth-buttons" *ngIf="!authService.isAuthenticated()">
     <button mat-button routerLink="/login">Вход</button>
     <button mat-raised-button color="accent" routerLink="/register">Регистрация</button>
+  </div>
+  
+  <div class="user-menu" *ngIf="authService.isAuthenticated()">
+    <button mat-button [matMenuTriggerFor]="userMenu">
+      <mat-icon>account_circle</mat-icon>
+      {{ authService.getUser()?.username }}
+    </button>
+    <mat-menu #userMenu="matMenu">
+      <button mat-menu-item routerLink="/profile">
+        <mat-icon>person</mat-icon>
+        <span>Профиль</span>
+      </button>
+      <button mat-menu-item *ngIf="authService.isAdmin()" routerLink="/reports">
+        <mat-icon>analytics</mat-icon>
+        <span>Отчеты</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Выйти</span>
+      </button>
+    </mat-menu>
   </div>
 </mat-toolbar>

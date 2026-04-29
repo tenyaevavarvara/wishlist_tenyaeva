@@ -14,13 +14,13 @@ mat-toolbar {
 .logo-svg {
   width: 32px;
   height: 32px;
-  color: white;
+  color: black;
 }
 
 .logo-text {
   font-size: 20px;
   font-weight: 500;
-  color: white;
+  color: black;
 }
 
 .spacer {
@@ -35,4 +35,9 @@ mat-toolbar {
 .auth-buttons {
   display: flex;
   gap: 8px;
+}
+
+.user-menu {
+  display: flex;
+  align-items: center;
 }

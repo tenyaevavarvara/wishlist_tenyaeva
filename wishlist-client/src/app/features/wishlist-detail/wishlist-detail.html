@@ -1,0 +1,121 @@
+<div class="detail-container" *ngIf="wishlist">
+  <!-- Заголовок -->
+  <div class="header">
+    <button mat-icon-button routerLink="/wishlists">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <div class="title-section">
+      <h1>{{ wishlist.name }}</h1>
+      <p class="owner">Автор: {{ wishlist.ownerName }}</p>
+      <p class="description" *ngIf="wishlist.description">{{ wishlist.description }}</p>
+    </div>
+    <div class="actions" *ngIf="isOwner">
+      <button mat-raised-button color="primary" (click)="openAddWishDialog()">
+        <mat-icon>add</mat-icon>
+        Добавить желание
+      </button>
+    </div>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <!-- Список желаний -->
+  <div class="wishes-section">
+    <h2>Желания ({{ wishes.length }})</h2>
+    
+    <div class="loading-spinner" *ngIf="loading">
+      <mat-spinner diameter="40"></mat-spinner>
+    </div>
+
+    <div class="wishes-grid" *ngIf="!loading">
+      <mat-card *ngFor="let wish of wishes" class="wish-card">
+        <mat-card-header>
+          <mat-card-title>{{ wish.title }}</mat-card-title>
+          <mat-card-subtitle>
+            <!-- Статус показываем ТОЛЬКО если просматривает НЕ владелец -->
+            <mat-chip *ngIf="shouldShowStatus()" [color]="WishStatusColors[wish.status]" selected>
+              {{ WishStatusLabels[wish.status] }}
+            </mat-chip>
+            <!-- Для владельца показываем просто метку "Ваше желание" -->
+            <span *ngIf="!shouldShowStatus()" class="owner-label">
+              <mat-icon>star</mat-icon> Ваше желание
+            </span>
+          </mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+          <p class="description" *ngIf="wish.description">{{ wish.description }}</p>
+          
+          <div class="details">
+            <div *ngIf="wish.price" class="detail-item">
+              <mat-icon>attach_money</mat-icon>
+              <span>{{ wish.price | number:'1.2-2' }} ₽</span>
+            </div>
+            <div *ngIf="wish.link" class="detail-item">
+              <mat-icon>link</mat-icon>
+              <a [href]="wish.link" target="_blank">Ссылка на товар</a>
+            </div>
+          </div>
+
+          <!-- Кто забронировал - показываем ТОЛЬКО если просматривает НЕ владелец и желание забронировано -->
+          <div class="booked-info" *ngIf="shouldShowStatus() && wish.status === WishStatus.Booked && wish.bookedByUserName">
+            <mat-icon>person</mat-icon>
+            <span>Забронировал: {{ wish.bookedByUserName }}</span>
+          </div>
+        </mat-card-content>
+
+        <mat-card-actions>
+          <!-- Кнопки для владельца -->
+          <ng-container *ngIf="canEdit(wish)">
+            <button mat-button color="accent" (click)="editWish(wish)">
+              <mat-icon>edit</mat-icon>
+              Редактировать
+            </button>
+            <button mat-button color="warn" (click)="deleteWish(wish.id)">
+              <mat-icon>delete</mat-icon>
+              Удалить
+            </button>
+            <!-- Для владельца показываем статус в виде кнопок действий -->
+            <!--
+            <button mat-button *ngIf="wish.status === WishStatus.Available" 
+                    (click)="updateStatus(wish, WishStatus.Fulfilled)">
+              <mat-icon>check_circle</mat-icon>
+              Отметить исполненным
+            </button>
+            -->
+            <button mat-button 
+                    [color]="wish.status === WishStatus.Fulfilled ? 'basic' : 'primary'"
+                    [disabled]="wish.status === WishStatus.Fulfilled"
+                    (click)="updateStatus(wish, WishStatus.Fulfilled)">
+                <mat-icon>check_circle</mat-icon>
+                {{ wish.status === WishStatus.Fulfilled ? 'Исполнено' : 'Отметить исполненным' }}
+            </button>
+          </ng-container>
+
+          <!-- Кнопки для бронирования (для других пользователей) -->
+          <ng-container *ngIf="canBook(wish)">
+            <button mat-raised-button color="primary" (click)="bookWish(wish.id)">
+              <mat-icon>shopping_cart</mat-icon>
+              Забронировать
+            </button>
+          </ng-container>
+
+          <!-- Кнопка отмены бронирования (для того, кто забронировал) -->
+          <ng-container *ngIf="canUnbook(wish)">
+            <button mat-button color="warn" (click)="unbookWish(wish.id)">
+              <mat-icon>remove_shopping_cart</mat-icon>
+              Отменить бронирование
+            </button>
+          </ng-container>
+        </mat-card-actions>
+      </mat-card>
+
+      <div class="no-wishes" *ngIf="wishes.length === 0">
+        <p>В этом вишлисте пока нет желаний</p>
+        <button *ngIf="isOwner" mat-raised-button color="primary" (click)="openAddWishDialog()">
+          Добавить первое желание
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

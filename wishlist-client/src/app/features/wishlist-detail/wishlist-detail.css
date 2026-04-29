@@ -1,0 +1,167 @@
+.detail-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.title-section {
+  flex: 1;
+}
+
+.title-section h1 {
+  margin: 0 0 8px 0;
+  font-size: 28px;
+  color: #2c3e50;
+}
+
+.owner {
+  color: #666;
+  margin: 0 0 8px 0;
+}
+
+.description {
+  color: #888;
+  margin: 0;
+}
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+}
+
+.wishes-section {
+  margin-top: 24px;
+}
+
+.wishes-section h2 {
+  margin-bottom: 20px;
+  font-size: 20px;
+  color: #2c3e50;
+}
+
+.wishes-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.wish-card {
+  margin-bottom: 8px;
+}
+
+.wish-card mat-card-header {
+  margin-bottom: 12px;
+}
+
+.wish-card mat-card-title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.booked-by {
+  margin-left: 12px;
+  font-size: 12px;
+  color: #666;
+}
+
+.description {
+  color: #444;
+  line-height: 1.4;
+  margin: 12px 0;
+}
+
+.details {
+  display: flex;
+  gap: 24px;
+  margin: 12px 0;
+  flex-wrap: wrap;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #666;
+}
+
+.detail-item mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
+.detail-item a {
+  color: #1976d2;
+  text-decoration: none;
+}
+
+.detail-item a:hover {
+  text-decoration: underline;
+}
+
+mat-card-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 8px 16px 16px;
+}
+
+.no-wishes {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+}
+
+.no-wishes p {
+  margin-bottom: 20px;
+}
+
+mat-divider {
+  margin: 16px 0;
+}
+
+/* Добавьте стиль для метки владельца */
+.owner-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background-color: #e8eaf6;
+  color: #3949ab;
+  padding: 4px 8px;
+  border-radius: 16px;
+  font-size: 12px;
+}
+
+.owner-label mat-icon {
+  font-size: 14px;
+  width: 14px;
+  height: 14px;
+}
+
+/* Стиль для информации о бронировании */
+.booked-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 8px;
+  background-color: #fff3e0;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #e65100;
+}
+
+.booked-info mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  color: #e65100;
+}

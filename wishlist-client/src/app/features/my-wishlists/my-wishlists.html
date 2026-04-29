@@ -1,0 +1,64 @@
+<div class="my-wishlists-container">
+  <div class="header">
+    <h1>Мои вишлисты</h1>
+    <button mat-raised-button color="primary" (click)="openCreateDialog()">
+      <mat-icon>add</mat-icon>
+      Создать вишлист
+    </button>
+  </div>
+
+  <div class="loading-spinner" *ngIf="loading">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
+
+  <div class="no-wishlists" *ngIf="!loading && wishlists.length === 0">
+    <mat-icon class="empty-icon">list_alt</mat-icon>
+    <h2>У вас пока нет вишлистов</h2>
+    <p>Создайте свой первый список желаний</p>
+    <button mat-raised-button color="primary" (click)="openCreateDialog()">
+      <mat-icon>add</mat-icon>
+      Создать вишлист
+    </button>
+  </div>
+
+  <div class="wishlists-grid" *ngIf="!loading && wishlists.length > 0">
+    <mat-card *ngFor="let wishlist of wishlists" class="wishlist-card">
+      <mat-card-header>
+        <mat-card-title>{{ wishlist.name }}</mat-card-title>
+        <mat-card-subtitle>Создан: {{ wishlist.createdAt | date:'dd.MM.yyyy' }}</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <p class="description" *ngIf="wishlist.description">{{ wishlist.description }}</p>
+        <p class="description" *ngIf="!wishlist.description" class="no-description">Нет описания</p>
+        
+        <div class="stats">
+          <mat-chip-set>
+            <mat-chip>Всего: {{ wishlist.wishesCount }}</mat-chip>
+            <mat-chip color="primary" highlighted *ngIf="wishlist.availableWishes > 0">
+              Доступно: {{ wishlist.availableWishes }}
+            </mat-chip>
+            <mat-chip color="accent" highlighted *ngIf="wishlist.bookedWishes > 0">
+              Забронировано: {{ wishlist.bookedWishes }}
+            </mat-chip>
+          </mat-chip-set>
+        </div>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-button color="primary" [routerLink]="['/wishlists', wishlist.id]">
+          <mat-icon>visibility</mat-icon>
+          Просмотр
+        </button>
+        <button mat-button color="accent" (click)="openEditDialog(wishlist)">
+          <mat-icon>edit</mat-icon>
+          Редактировать
+        </button>
+        <button mat-button color="warn" (click)="deleteWishlist(wishlist.id)">
+          <mat-icon>delete</mat-icon>
+          Удалить
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

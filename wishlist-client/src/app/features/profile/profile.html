@@ -1,0 +1,51 @@
+<div class="profile-container" *ngIf="user">
+  <div class="profile-header">
+    <mat-icon class="avatar-icon">account_circle</mat-icon>
+    <h1>{{ user.username }}</h1>
+    <p class="email">{{ user.email }}</p>
+    <mat-chip [color]="user.role === 'Admin' ? 'accent' : 'primary'" selected>
+      {{ user.role === 'Admin' ? 'Администратор' : 'Пользователь' }}
+    </mat-chip>
+  </div>
+
+  <div class="loading-spinner" *ngIf="loading">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
+
+  <div class="stats-grid" *ngIf="!loading">
+    <mat-card class="stat-card" routerLink="/my-wishlists">
+      <mat-icon class="stat-icon">list_alt</mat-icon>
+      <div class="stat-value">{{ myWishlistsCount }}</div>
+      <div class="stat-label">Мои вишлисты</div>
+    </mat-card>
+
+    <mat-card class="stat-card" routerLink="/my-bookings">
+      <mat-icon class="stat-icon">shopping_cart</mat-icon>
+      <div class="stat-value">{{ myBookingsCount }}</div>
+      <div class="stat-label">Мои бронирования</div>
+    </mat-card>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div class="profile-actions">
+    <h2>Действия</h2>
+    
+    <div class="actions-grid">
+      <button mat-raised-button color="primary" routerLink="/my-wishlists">
+        <mat-icon>list_alt</mat-icon>
+        Мои вишлисты
+      </button>
+      
+      <button mat-raised-button color="accent" routerLink="/my-bookings">
+        <mat-icon>shopping_cart</mat-icon>
+        Мои бронирования
+      </button>
+      
+      <button mat-raised-button color="warn" (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon>
+        Выйти
+      </button>
+    </div>
+  </div>
+</div>
